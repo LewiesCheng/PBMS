@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 # Personal Book Management System 
 
 # 个人帐簿管理系统设计 PBMS
@@ -26,6 +24,3 @@
 4）要提供程序测试方案
 
 5) 程序一定要经得起测试，宁可功能少一些，也要能运行起来，不能运行的程序是没有价值的。
-=======
-Personal Book Management System 
->>>>>>> af95fc1a652cf1b4d7ed3dccfcc544caac757496
