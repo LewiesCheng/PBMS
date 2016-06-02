@@ -1,0 +1,21 @@
+table, td{
+    border: 1px solid black;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: aliceblue;
+}
+
+td {
+    text-align: center;
+    height: 30px;
+    width: 100px;
+}
+
+table caption {
+    width: 330px;
+    height: 30px;
+    text-align: left;
+    background-color: #cfe7e5;
+}

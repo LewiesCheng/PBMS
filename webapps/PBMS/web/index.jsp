@@ -4,12 +4,14 @@
   Follow me on github https://github.com/JoyHwong
 
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=utf-8" language="java" %>
 <html>
-  <head>
-    <title></title>
-  </head>
-  <body>
-    heehh
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+    <%@include file="html/index.html"%>
+</body>
 </html>

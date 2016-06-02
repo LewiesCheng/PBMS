@@ -1,0 +1,44 @@
+div#user, div#password{
+    width: 300px;
+    height: 42px;
+    border: 1px solid #189BE7;
+    border-radius: 3px;
+}
+
+input.input{
+    border: none;
+    outline: none;
+    font-size: 18px;
+    width: 298px;
+    height: 40px;
+}
+
+input#button {
+    border: none;
+    outline: none;
+    width: 300px;
+    height: 42px;
+    background-color: #0f88eb;
+    color: white;
+    border-radius: 3px;
+    cursor:pointer
+}
+
+input#button:hover {
+    background-color: #189BE7;
+}
+
+h1 {
+    text-align: center;
+}
+
+div#out {
+    width: 300px;
+    height: 560px;
+    margin: 0 auto;
+}
+
+span {
+    color: red;
+    visibility: visible;
+}
