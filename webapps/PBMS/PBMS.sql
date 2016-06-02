@@ -14,7 +14,8 @@ CREATE TABLE `account` (
   `month` INT NOT NULL,
   `tInc` FLOAT NULL,
   `tExp` FLOAT NULL,
-  PRIMARY KEY (`aId`))
+  PRIMARY KEY (`aId`)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -42,6 +43,7 @@ CREATE TABLE `expenditure` (
   `month` INT NOT NULL,
   `type` VARCHAR(20) NOT NULL,
   `money` FLOAT NOT NULL,
-  PRIMARY KEY (`eId`))
+  PRIMARY KEY (`eId`)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
