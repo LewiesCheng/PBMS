@@ -18,8 +18,7 @@ import java.sql.SQLException;
  * follow me on github https://github.com/JoyHwong
  */
 public class MoneyServlet extends HttpServlet {
-
-    private Count count;
+    private Connection connection;
 
     @Override
     public void init() throws ServletException {
@@ -28,14 +27,60 @@ public class MoneyServlet extends HttpServlet {
         String database_user = context.getInitParameter("database_user");
         String database_password = context.getInitParameter("database_password");
         String driver = context.getInitParameter("driver");
-        count = new Count();
-        Connection connection = new ConnectDatabase(driver, database, database_user, database_password).getConnection();
+        connection = new ConnectDatabase(driver, database, database_user, database_password).getConnection();
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        init();
+        Count count = new Count();
+
         PreparedStatement preparedStatement;
         ResultSet resultSet;
 
         try {
+            // 从request里面获取year和month
+            String year = request.getParameter("year");
+            String month = request.getParameter("month");
+            if (year == null || month == null) {
+                year = "2016";
+                month = "6";
+            }
+            count.setMonth(month);
+            count.setYear(year);
+
+            // 数据库中查询支出明细
+            preparedStatement = connection.prepareStatement("SELECT food, rent, educate, utilitie, medical from spenddetail WHERE y = ? and m = ?");
+            preparedStatement.setString(1, year);
+            preparedStatement.setString(2, month);
+            resultSet = preparedStatement.executeQuery();
+
+            //将支出明细汇总到明细中
+            float spend = 0.00f;
+            while (resultSet.next()) {
+                count.setFood(resultSet.getFloat(1));
+                spend += count.getFood();
+                count.setRent(resultSet.getFloat(2));
+                spend += count.getRent();
+                count.setEducate(resultSet.getFloat(3));
+                spend += count.getEducate();
+                count.setUtilitie(resultSet.getFloat(4));
+                spend += count.getUtilitie();
+                count.setMedical(resultSet.getFloat(5));
+                spend += count.getMedical();
+            }
+            count.setSpend(spend);
+
+            // 更新支出
+            preparedStatement = connection.prepareStatement("UPDATE bop set spend = ? WHERE y = ? AND m = ?");
+            preparedStatement.setFloat(1, count.getSpend());
+            preparedStatement.setString(2, year);
+            preparedStatement.setString(3, month);
+            preparedStatement.executeUpdate();
+
+            // 查询收入和支出来统计本年的总支出和总收入
             preparedStatement = connection.prepareStatement("select income, spend from bop WHERE y = ?");
-            preparedStatement.setString(1, "2016");
+            preparedStatement.setString(1, year);
             resultSet  = preparedStatement.executeQuery();
             float totalincome = 0.00f;
             float totalSpend = 0.00f;
@@ -43,33 +88,29 @@ public class MoneyServlet extends HttpServlet {
                 totalincome += resultSet.getFloat("income");
                 totalSpend += resultSet.getFloat("spend");
             }
-
             count.setTotalIncome(totalincome);
             count.setTotalSpend(totalSpend);
 
-            preparedStatement = connection.prepareStatement("select income, spend from bop where y = ? and m = ?");
-            preparedStatement.setString(1, "2016");
-            preparedStatement.setString(2, "6");
+            // 查询某年某月的收入
+            preparedStatement = connection.prepareStatement("select income from bop where y = ? and m = ?");
+            preparedStatement.setString(1, year);
+            preparedStatement.setString(2, month);
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 count.setIncome(resultSet.getFloat(1));
-                count.setSpend(resultSet.getFloat(2));
             }
 
+            // 关闭资源
             resultSet.close();
             preparedStatement.close();
             connection.close();
         } catch (SQLException sqlException) {
             System.out.println("Execute database query error");
+        } finally {
+            HttpSession session = request.getSession();
+            session.setAttribute("count", count);
+            response.sendRedirect("money.jsp");
         }
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        init();
-        HttpSession session = request.getSession();
-        session.setAttribute("count", count);
-        response.sendRedirect("money.jsp");
     }
 
     @Override

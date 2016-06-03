@@ -1,49 +1,73 @@
-# MySQL Workbench 6.3 CE
+CREATE TABLE BOP (
+  y CHAR(4) not NULL,
+  m CHAR(2) not NULL,
+  income FLOAT,
+  spend FLOAT,
+  PRIMARY KEY (y, m)
+);
 
-# Host: localhost    Database: pbms
-# ------------------------------------------------------
+INSERT INTO BOP VALUES (
+  '2016', '6', 1000.0, 800
+);
 
+INSERT INTO BOP VALUES (
+  '2016', '5', 1200.0, 1234
+);
 
-#
-# Table structure for table account
-#
-DROP TABLE IF EXISTS `account`;
-CREATE TABLE `account` (
-  `aId` VARCHAR(10) NOT NULL,
-  `year` INT NOT NULL,
-  `month` INT NOT NULL,
-  `tInc` FLOAT NULL,
-  `tExp` FLOAT NULL,
-  PRIMARY KEY (`aId`)
-)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+INSERT INTO BOP VALUES (
+  '2016', '4', 976.0, 1532
+);
 
-#
-# Table structure for table income
-#
-DROP TABLE IF EXISTS `income`;
-CREATE TABLE `income` (
-  `iId` VARCHAR(10) NOT NULL,
-  `year` INT NOT NULL,
-  `month` INT NOT NULL,
-  `type` VARCHAR(20) NOT NULL,
-  `money` FLOAT NOT NULL,
-  PRIMARY KEY (`iId`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+INSERT INTO BOP VALUES (
+  '2016', '3', 942.0, 1642
+);
+INSERT INTO BOP VALUES (
+  '2016', '2', 650.0, 1215
+);
+INSERT INTO BOP VALUES (
+  '2016', '1', 1950.0, 1252
+);
 
-#
-# Table structure for table expenditure
-#
-DROP TABLE IF EXISTS `expenditure`;
-CREATE TABLE `expenditure` (
-  `eId` VARCHAR(10) NOT NULL,
-  `year` INT NOT NULL,
-  `month` INT NOT NULL,
-  `type` VARCHAR(20) NOT NULL,
-  `money` FLOAT NOT NULL,
-  PRIMARY KEY (`eId`)
-)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+INSERT INTO BOP VALUES (
+  '2015', '12', 1323.0, 3400
+);
+
+INSERT INTO BOP VALUES (
+  '2015', '11', 1543.0, 5432
+);
+
+INSERT INTO BOP VALUES (
+  '2015', '10', 3464.0, 2346
+);
+
+INSERT INTO BOP VALUES (
+  '2015', '9', 1346.0, 1642
+);
+INSERT INTO BOP VALUES (
+  '2015', '8', 1643.0, 1215
+);
+INSERT INTO BOP VALUES (
+  '2015', '7', 2346.0, 1252
+);
+
+INSERT INTO BOP VALUES (
+  '2015', '6', 2346.0, 1634
+);
+
+INSERT INTO BOP VALUES (
+  '2015', '5', 2642.0, 1234
+);
+
+INSERT INTO BOP VALUES (
+  '2015', '4', 1644.0, 1532
+);
+
+INSERT INTO BOP VALUES (
+  '2015', '3', 1346.0, 1642
+);
+INSERT INTO BOP VALUES (
+  '2015', '2', 1346.0, 1215
+);
+INSERT INTO BOP VALUES (
+  '2015', '1', 3461.0, 3461
+);

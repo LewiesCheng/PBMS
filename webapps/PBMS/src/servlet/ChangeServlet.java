@@ -31,29 +31,67 @@ public class ChangeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        init();
         String income = request.getParameter("income");
-        String spend = request.getParameter("spend");
-        System.out.println("income " + income);
-        System.out.println("spend " + spend);
+        String food = request.getParameter("food");
+        String rent = request.getParameter("rent");
+        String educate = request.getParameter("educate");
+        String utilitie = request.getParameter("utilitie");
+        String medical = request.getParameter("medical");
+        String year = request.getParameter("year");
+        String month = request.getParameter("month");
+        PreparedStatement preparedStatement = null;
         try {
-            PreparedStatement preparedStatement;
             if (income != null) {
                 preparedStatement = connection.prepareStatement("update bop set income = ? WHERE y = ? AND m = ?");
                 preparedStatement.setFloat(1, Float.parseFloat(income));
-                preparedStatement.setString(2, "2016");
-                preparedStatement.setString(3, "6");
+                preparedStatement.setString(2, year);
+                preparedStatement.setString(3, month);
                 preparedStatement.executeUpdate();
-            } else if (spend != null) {
-                preparedStatement = connection.prepareStatement("update bop set spend = ? WHERE y = ? AND m = ?");
-                preparedStatement.setFloat(1, Float.parseFloat(spend));
-                preparedStatement.setString(2, "2016");
-                preparedStatement.setString(3, "6");
+            } else if (food != null) {
+                preparedStatement = connection.prepareStatement("update spenddetail set food = ? WHERE y = ? AND m = ?");
+                preparedStatement.setFloat(1, Float.parseFloat(food));
+                preparedStatement.setString(2, year);
+                preparedStatement.setString(3, month);
+                preparedStatement.executeUpdate();
+            } else if (rent != null) {
+                preparedStatement = connection.prepareStatement("update spenddetail set rent = ? WHERE y = ? AND m = ?");
+                preparedStatement.setFloat(1, Float.parseFloat(rent));
+                preparedStatement.setString(2, year);
+                preparedStatement.setString(3, month);
+                preparedStatement.executeUpdate();
+            } else if (educate != null) {
+                preparedStatement = connection.prepareStatement("update spenddetail set educate = ? WHERE y = ? AND m = ?");
+                preparedStatement.setFloat(1, Float.parseFloat(educate));
+                preparedStatement.setString(2, year);
+                preparedStatement.setString(3, month);
+                preparedStatement.executeUpdate();
+            } else if (utilitie != null) {
+                preparedStatement = connection.prepareStatement("update spenddetail set utilitie = ? WHERE y = ? AND m = ?");
+                preparedStatement.setFloat(1, Float.parseFloat(utilitie));
+                preparedStatement.setString(2, year);
+                preparedStatement.setString(3, month);
+                preparedStatement.executeUpdate();
+            } else if (medical != null) {
+                preparedStatement = connection.prepareStatement("update spenddetail set medical = ? WHERE y = ? AND m = ?");
+                preparedStatement.setFloat(1, Float.parseFloat(medical));
+                preparedStatement.setString(2, year);
+                preparedStatement.setString(3, month);
                 preparedStatement.executeUpdate();
             }
+
         } catch (SQLException e) {
             System.out.println("更新数据库出错");
         } finally {
-            response.sendRedirect("/money");
+            try {
+                preparedStatement.close();
+                connection.close();
+            } catch (SQLException e) {
+                    System.out.println("关闭数据库出错");
+            }
+
+            String s = "/money?year=" + year + "&month=" + month;
+            request.getRequestDispatcher(s).forward(request, response);
         }
     }
 }
