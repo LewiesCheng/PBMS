@@ -4,6 +4,5 @@
 var btn = document.getElementById('button');
 
 btn.addEventListener("click", function () {
-    // location.href = '';
-    alert('Hello');
+    location.href = 'money';
 }, false);

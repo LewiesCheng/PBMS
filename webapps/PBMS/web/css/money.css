@@ -10,12 +10,27 @@ table {
 td {
     text-align: center;
     height: 30px;
-    width: 100px;
+    width: 200px;
 }
 
 table caption {
-    width: 330px;
+    width: 629px;
     height: 30px;
-    text-align: left;
+    text-align: center;
     background-color: #cfe7e5;
+    line-height: 30px;
+}
+
+div#wapper {
+    position: absolute;
+    left: 50%;
+    margin-left: -314px;
+}
+
+input.hidden {
+    text-align: right;
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: black;
 }
