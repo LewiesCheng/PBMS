@@ -20,4 +20,44 @@
             <include-coda></include-coda>
         </jsp-property-group>
     </jsp-config>
+
+    <servlet>
+        <servlet-name>money</servlet-name>
+        <servlet-class>servlet.MoneyServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>money</servlet-name>
+        <url-pattern>/money</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>change</servlet-name>
+        <servlet-class>servlet.ChangeServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>change</servlet-name>
+        <url-pattern>/change</url-pattern>
+    </servlet-mapping>
+    
+    <context-param>
+        <param-name>database</param-name>
+        <param-value>jdbc:mysql://localhost:3306/pbms</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>database_user</param-name>
+        <param-value>root</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>database_password</param-name>
+        <param-value>12##xcxnxn$$34</param-value>
+    </context-param>
+    
+    <context-param>
+        <param-name>driver</param-name>
+        <param-value>com.mysql.jdbc.Driver</param-value>
+    </context-param>
 </web-app>
