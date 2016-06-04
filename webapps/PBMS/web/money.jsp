@@ -1,12 +1,6 @@
 <%@ page import="servlet.Count" %>
 <%@ page import="servlet.Item" %>
 <%@ page import="java.util.Arrays" %>
-<%--
-  Created by JoyHwong on 16/6/3.
-  Copyright @ 2016 All right reserved.
-  Follow me on github https://github.com/JoyHwong
-
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

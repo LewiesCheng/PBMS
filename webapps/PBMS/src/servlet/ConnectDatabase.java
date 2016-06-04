@@ -4,11 +4,6 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * Created by JoyHwong on 16/6/3.
- * copyright @ 2016 All right reserved.
- * follow me on github https://github.com/JoyHwong
- */
 public class ConnectDatabase {
 
     private Connection connection;
