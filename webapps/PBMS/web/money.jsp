@@ -1,6 +1,5 @@
 <%@ page import="servlet.Count" %>
 <%@ page import="servlet.Item" %>
-<%@ page import="java.util.Arrays" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -12,12 +11,12 @@
     Count count = (Count)request.getSession().getAttribute("count");
 %>
 <div id="wapper">
-    <form method="get" action="money">
+    <form method="get" action="money" onsubmit="return check();">
         <select name="year" id="yearSelect">
             <option value="2016" <%=count.getYear().equals("2016") ? "Selected" : ""%>>2016</option>
             <option value="2015" <%=count.getYear().equals("2015") ? "Selected" : ""%>>2015</option>
         </select>
-        <select name="month">
+        <select name="month" id="monthSelect">
             <option value="12" <%=count.getMonth().equals("12") ? "Selected" : ""%>>12</option>
             <option value="11" <%=count.getMonth().equals("11") ? "Selected" : ""%>>11</option>
             <option value="10" <%=count.getMonth().equals("10") ? "Selected" : ""%>>10</option>
@@ -68,7 +67,17 @@
         items[3] = new Item("水电费", count.getUtilitie());
         items[4] = new Item("医疗费", count.getMedical());
 
-        Arrays.sort(items);
+        // 冒泡排序
+        for (int i = 1; i < items.length; i++) {
+            for (int j = i; j > 0; j--) {
+                if (items[j].compareTo(items[j-1]) < 0) {
+                    Item temp = items[j];
+                    items[j] = items[j - 1];
+                    items[j - 1] = temp;
+                }
+            }
+        }
+
         out.println("<thead>");
         for (Item item : items) {
             out.println("<td>" + item.getItem() + "</td>");
@@ -83,6 +92,7 @@
     %>
     </table>
 </div>
+<script lang="javascript" type="text/javascript" src="javascript/check.js"></script>
 <script lang="javascript" type="text/javascript" src="javascript/money.js"></script>
 </body>
 </html>
